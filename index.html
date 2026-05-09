@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Match Ready — Dating Profile Photography for Men</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+:root {
+  --bg: hsl(222, 47%, 5%);
+  --surface: hsla(222, 47%, 15%, 0.4);
+  --surface-solid: hsl(222, 47%, 11%);
+  --border: hsla(222, 47%, 30%, 0.4);
+  --border-light: hsla(222, 47%, 40%, 0.6);
+  --text: hsl(210, 40%, 98%);
+  --text-muted: hsl(215, 20%, 65%);
+  --accent-base: hsl(35, 95%, 55%);
+  --accent: linear-gradient(135deg, hsl(35, 95%, 55%), hsl(350, 85%, 60%));
+  --accent-hover: linear-gradient(135deg, hsl(35, 95%, 60%), hsl(350, 85%, 65%));
+  --pill-bg: hsla(222, 47%, 20%, 0.5);
+  --serif: 'Outfit', sans-serif;
+  --sans: 'Inter', sans-serif;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 100px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* GLOWS */
+.bg-glow {
+  position: absolute; width: 600px; height: 600px;
+  background: radial-gradient(circle, hsla(35, 95%, 55%, 0.15) 0%, transparent 70%);
+  top: -100px; right: -100px; z-index: -1; border-radius: 50%;
+  filter: blur(60px); pointer-events: none;
+}
+.bg-glow-2 {
+  position: absolute; width: 600px; height: 600px;
+  background: radial-gradient(circle, hsla(350, 85%, 60%, 0.1) 0%, transparent 70%);
+  top: 40%; left: -200px; z-index: -1; border-radius: 50%;
+  filter: blur(60px); pointer-events: none;
+}
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: hsla(222, 47%, 5%, 0.7);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem; display: flex; align-items: center; justify-content: space-between;
+  height: 72px; transition: all 0.3s ease;
+}
+
+.nav-logo {
+  display: flex; align-items: center; gap: 10px; text-decoration: none;
+  font-family: var(--serif); font-size: 20px; font-weight: 800;
+  color: var(--text); letter-spacing: -0.02em;
+}
+
+.nav-logo-icon {
+  width: 34px; height: 34px; background: var(--accent); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 12px hsla(35, 95%, 55%, 0.3);
+}
+.nav-logo-icon svg { width: 18px; height: 18px; stroke: white; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+.nav-links { display: flex; align-items: center; gap: 0.5rem; list-style: none; }
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: var(--text-muted); text-decoration: none;
+  padding: 8px 16px; border-radius: var(--radius-pill); transition: all 0.2s;
+}
+.nav-links a:hover { color: var(--text); background: var(--surface-solid); }
+
+.nav-cta {
+  background: var(--surface-solid); color: var(--text) !important;
+  border: 1px solid var(--border-light); padding: 8px 24px !important; font-weight: 600 !important;
+}
+.nav-cta:hover {
+  background: var(--text) !important; color: var(--bg) !important;
+  transform: translateY(-2px); box-shadow: 0 4px 12px hsla(35, 95%, 55%, 0.2);
+}
+
+/* HERO */
+.hero {
+  display: grid; grid-template-columns: 1.1fr 0.9fr; min-height: calc(100vh - 72px);
+  align-items: center; padding: 4rem 2rem 4rem 4rem; max-width: 1240px; margin: 0 auto; gap: 4rem;
+}
+.hero-left { max-width: 580px; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: hsla(35, 95%, 55%, 0.1); color: hsl(35, 95%, 65%);
+  border: 1px solid hsla(35, 95%, 55%, 0.2); font-size: 13px; font-weight: 600;
+  padding: 8px 16px; border-radius: var(--radius-pill); margin-bottom: 1.5rem;
+  box-shadow: inset 0 0 12px hsla(35, 95%, 55%, 0.05);
+}
+.hero-badge svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+h1.hero-title {
+  font-family: var(--serif); font-size: clamp(42px, 5vw, 68px); font-weight: 800;
+  line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.25rem;
+  background: linear-gradient(to right, #fff, var(--text-muted));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+h1.hero-title span { background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+.hero-sub { font-size: 17px; color: var(--text-muted); line-height: 1.7; margin-bottom: 2.5rem; max-width: 480px; }
+
+.hero-search-bar {
+  display: flex; align-items: center; background: var(--surface); backdrop-filter: blur(12px);
+  border: 1px solid var(--border); border-radius: var(--radius-pill); padding: 8px 8px 8px 24px;
+  box-shadow: 0 8px 32px hsla(0, 0%, 0%, 0.3); margin-bottom: 2rem; flex-wrap: wrap; transition: border-color 0.3s;
+}
+.hero-search-bar:hover { border-color: var(--border-light); }
+
+.search-field { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 120px; padding: 8px 20px 8px 0; border-right: 1px solid var(--border); }
+.search-field:last-of-type { border-right: none; }
+.search-field svg { width: 18px; height: 18px; stroke: var(--accent-base); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.search-field input, .search-field select { border: none; outline: none; font-family: var(--sans); font-size: 15px; color: var(--text); background: transparent; width: 100%; cursor: pointer; }
+.search-field input::placeholder { color: var(--text-muted); }
+.search-field select option { background: var(--surface-solid); color: var(--text); }
+
+.hero-search-btn {
+  background: var(--accent); color: white; border: none; border-radius: var(--radius-pill);
+  padding: 14px 28px; font-family: var(--sans); font-size: 15px; font-weight: 700;
+  cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 14px hsla(35, 95%, 55%, 0.3); white-space: nowrap;
+}
+.hero-search-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px hsla(35, 95%, 55%, 0.4); }
+
+.hero-cities { display: flex; flex-wrap: wrap; gap: 10px; }
+.city-tag {
+  font-size: 13px; font-weight: 500; color: var(--text-muted); background: var(--pill-bg);
+  padding: 6px 16px; border-radius: var(--radius-pill); border: 1px solid transparent; transition: all 0.2s;
+}
+.city-tag:hover { color: var(--text); border-color: var(--border-light); background: var(--surface-solid); }
+
+@keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-12px); } 100% { transform: translateY(0px); } }
+
+.hero-right {
+  position: relative; height: 600px; border-radius: var(--radius-lg); overflow: hidden;
+  border: 1px solid var(--border);
+  background: url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;
+  box-shadow: 0 20px 40px hsla(0, 0%, 0%, 0.5); animation: float 6s ease-in-out infinite;
+}
+.hero-right::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, hsla(222, 47%, 5%, 0.9) 0%, transparent 60%); }
+
+.hero-img-overlay { position: absolute; z-index: 2; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 2.5rem; }
+.hero-img-text { color: white; font-family: var(--serif); font-size: 28px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.01em; }
+.hero-img-sub { color: hsla(0, 0%, 100%, 0.7); font-size: 15px; }
+
+.hero-stat-card {
+  position: absolute; top: 1.5rem; left: 1.5rem; z-index: 2;
+  background: hsla(222, 47%, 10%, 0.6); backdrop-filter: blur(16px);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1.25rem 1.5rem; box-shadow: 0 8px 32px hsla(0, 0%, 0%, 0.3);
+  display: flex; flex-direction: column; gap: 16px;
+}
+.stat-item { display: flex; flex-direction: column; }
+.stat-num { font-family: var(--serif); font-size: 24px; font-weight: 800; background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
+.stat-label { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
+
+/* SECTIONS */
+section { padding: 6rem 2rem; }
+.container { max-width: 1200px; margin: 0 auto; }
+
+.section-tag {
+  display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  background: hsla(35, 95%, 55%, 0.1); color: hsl(35, 95%, 65%);
+  border: 1px solid hsla(35, 95%, 55%, 0.2); box-shadow: inset 0 0 12px hsla(35, 95%, 55%, 0.05);
+  padding: 6px 14px; border-radius: var(--radius-pill); margin-bottom: 1.25rem;
+}
+
+.section-title {
+  font-family: var(--serif); font-size: clamp(32px, 4vw, 48px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em;
+  color: var(--text); margin-bottom: 1rem;
+}
+.section-sub { font-size: 16px; color: var(--text-muted); line-height: 1.75; max-width: 580px; }
+
+/* PACKAGES */
+.packages-section { position: relative; }
+.pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
+
+.pkg-card {
+  background: var(--surface); backdrop-filter: blur(12px); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 2.5rem; position: relative; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.pkg-card:hover { transform: translateY(-8px); border-color: var(--border-light); box-shadow: 0 20px 40px hsla(0,0%,0%,0.4); }
+
+.pkg-card.featured {
+  background: linear-gradient(180deg, hsla(222, 47%, 15%, 0.6) 0%, hsla(222, 47%, 10%, 0.6) 100%);
+  border-color: hsla(35, 95%, 55%, 0.5); box-shadow: 0 20px 40px hsla(0,0%,0%,0.4), inset 0 0 0 1px hsla(35, 95%, 55%, 0.2);
+}
+.pkg-card.featured:hover { border-color: var(--accent-base); box-shadow: 0 20px 40px hsla(0,0%,0%,0.5), 0 0 30px hsla(35, 95%, 55%, 0.15); }
+
+.pkg-featured-badge {
+  display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+  background: var(--accent); color: white; padding: 6px 14px; border-radius: var(--radius-pill);
+  margin-bottom: 1.5rem; box-shadow: 0 4px 12px hsla(35, 95%, 55%, 0.3);
+}
+
+.pkg-name { font-family: var(--serif); font-size: 24px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+.pkg-tagline { font-size: 14px; color: var(--text-muted); margin-bottom: 1.5rem; }
+
+.pkg-price { display: flex; align-items: baseline; gap: 2px; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid hsla(255,255,255,0.05); }
+.pkg-dollar { font-size: 20px; font-weight: 600; color: var(--text-muted); margin-top: 4px; }
+.pkg-amount { font-family: var(--serif); font-size: 56px; font-weight: 800; color: var(--text); line-height: 1; letter-spacing: -0.02em; }
+
+.pkg-features { list-style: none; margin-bottom: 2.5rem; }
+.pkg-features li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text-muted); padding: 10px 0; border-bottom: 1px solid hsla(255,255,255,0.05); line-height: 1.5; }
+.pkg-features li:last-child { border-bottom: none; }
+.pkg-features li .check { width: 20px; height: 20px; min-width: 20px; border-radius: 50%; background: hsla(35, 95%, 55%, 0.1); border: 1px solid hsla(35, 95%, 55%, 0.2); display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+.pkg-features li .check svg { width: 10px; height: 10px; stroke: var(--accent-base); fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+
+.pkg-btn {
+  display: block; width: 100%; text-align: center; padding: 14px; border-radius: var(--radius-pill); font-size: 15px; font-weight: 700; cursor: pointer;
+  background: transparent; color: var(--text); border: 1px solid var(--border-light); transition: all 0.2s; font-family: var(--sans);
+}
+.pkg-btn:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
+.pkg-card.featured .pkg-btn { background: var(--accent); color: white; border: none; }
+.pkg-card.featured .pkg-btn:hover { background: var(--accent-hover); color: white; box-shadow: 0 4px 15px hsla(35, 95%, 55%, 0.4); }
+
+/* ADD-ONS */
+.addons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.25rem; margin-top: 3rem; }
+.addon-card { background: var(--surface); border: 1px solid var(--border); backdrop-filter: blur(12px); border-radius: var(--radius); padding: 1.75rem; transition: all 0.3s; cursor: default; }
+.addon-card:hover { transform: translateY(-4px); border-color: var(--accent-base); background: hsla(222, 47%, 15%, 0.6); box-shadow: 0 10px 30px hsla(0,0%,0%,0.3); }
+.addon-icon { width: 44px; height: 44px; background: hsla(35, 95%, 55%, 0.1); border: 1px solid hsla(35, 95%, 55%, 0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
+.addon-icon svg { width: 20px; height: 20px; stroke: var(--accent-base); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.addon-name { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.addon-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+.addon-price { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--text); }
+
+/* PROCESS */
+.process-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 2rem; }
+.process-steps { margin-top: 3rem; display: flex; flex-direction: column; gap: 0; }
+.process-step { display: flex; gap: 1.5rem; padding: 1.75rem 0; border-bottom: 1px solid hsla(255,255,255,0.05); align-items: flex-start; }
+.process-step:first-child { padding-top: 0; }
+.process-step:last-child { border-bottom: none; }
+.step-num { width: 40px; height: 40px; min-width: 40px; background: var(--surface-solid); border: 1px solid var(--border-light); color: var(--accent-base); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; font-family: var(--serif); box-shadow: inset 0 0 10px hsla(0,0%,0%,0.5); }
+.step-title { font-size: 17px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.step-detail { font-size: 15px; color: var(--text-muted); line-height: 1.7; }
+
+.process-visual { background: var(--surface); border: 1px solid var(--border); backdrop-filter: blur(12px); border-radius: var(--radius-lg); padding: 3rem; position: relative; overflow: hidden; box-shadow: 0 20px 40px hsla(0,0%,0%,0.4); }
+.process-visual::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--accent); }
+.process-visual-title { font-family: var(--serif); font-size: 30px; font-weight: 800; line-height: 1.2; margin-bottom: 2rem; letter-spacing: -0.01em; }
+.process-visual-wrapper { display: flex; flex-direction: column; gap: 1.25rem; }
+.process-highlight { display: flex; align-items: flex-start; gap: 14px; background: hsla(0,0%,0%,0.2); border: 1px solid hsla(255,255,255,0.05); border-radius: var(--radius); padding: 1.25rem 1.5rem; transition: transform 0.2s; }
+.process-highlight:hover { transform: translateX(4px); border-color: hsla(35, 95%, 55%, 0.3); background: hsla(255,255,255,0.03); }
+.process-highlight svg { width: 22px; height: 22px; stroke: var(--accent-base); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; margin-top: 2px; }
+.process-highlight-text { font-size: 14px; line-height: 1.6; color: var(--text-muted); }
+.process-highlight-text strong { font-weight: 600; color: var(--text); display: block; font-size: 15px; margin-bottom: 2px; }
+
+/* CTA BANNER */
+.cta-banner { background: var(--surface); border: 1px solid var(--border-light); backdrop-filter: blur(12px); border-radius: var(--radius-lg); padding: 4rem; text-align: center; margin: 2rem 2rem 5rem; max-width: 1200px; margin-left: auto; margin-right: auto; position: relative; overflow: hidden; box-shadow: 0 20px 40px hsla(0,0%,0%,0.4); }
+.cta-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, hsla(35, 95%, 55%, 0.1) 0%, transparent 70%); pointer-events: none; }
+.cta-banner-title { font-family: var(--serif); font-size: clamp(32px, 4vw, 46px); font-weight: 800; line-height: 1.1; margin-bottom: 1rem; letter-spacing: -0.02em; }
+.cta-banner-sub { font-size: 17px; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+.cta-banner-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: white; font-family: var(--sans); font-size: 16px; font-weight: 700; padding: 16px 36px; border-radius: var(--radius-pill); text-decoration: none; border: none; cursor: pointer; transition: all 0.2s; position: relative; z-index: 1; }
+.cta-banner-btn:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 6px 20px hsla(35, 95%, 55%, 0.4); }
+.cta-banner-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+/* FAQ */
+.faq-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 3.5rem; align-items: start; }
+.faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 12px; transition: all 0.3s; }
+.faq-item:hover { border-color: var(--border-light); }
+.faq-item.open { border-color: var(--accent-base); background: hsla(222, 47%, 15%, 0.6); box-shadow: 0 10px 30px hsla(0,0%,0%,0.2); }
+.faq-question { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.25rem 1.5rem; cursor: pointer; user-select: none; }
+.faq-q { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.5; }
+.faq-icon { width: 28px; height: 28px; min-width: 28px; border-radius: 50%; background: hsla(255,255,255,0.05); display: flex; align-items: center; justify-content: center; transition: all 0.3s; flex-shrink: 0; }
+.faq-item.open .faq-icon { background: hsla(35, 95%, 55%, 0.1); }
+.faq-icon svg { width: 14px; height: 14px; stroke: var(--text-muted); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.3s, stroke 0.3s; }
+.faq-item.open .faq-icon svg { transform: rotate(45deg); stroke: var(--accent-base); }
+.faq-a { font-size: 14px; color: var(--text-muted); line-height: 1.75; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.4s ease; padding: 0 1.5rem; opacity: 0; }
+.faq-item.open .faq-a { max-height: 300px; padding: 0 1.5rem 1.5rem; opacity: 1; }
+
+.faq-cta-card { background: var(--surface); border: 1px solid var(--border); backdrop-filter: blur(12px); border-radius: var(--radius-lg); padding: 2.5rem; position: sticky; top: 100px; box-shadow: 0 20px 40px hsla(0,0%,0%,0.3); }
+.faq-cta-card .section-tag { margin-bottom: 1rem; }
+.faq-cta-title { font-family: var(--serif); font-size: 26px; font-weight: 800; color: var(--text); margin-bottom: 0.75rem; line-height: 1.2; letter-spacing: -0.01em; }
+.faq-cta-sub { font-size: 15px; color: var(--text-muted); line-height: 1.75; margin-bottom: 2rem; }
+.faq-cta-btn { display: block; width: 100%; text-align: center; background: var(--text); color: var(--bg); font-family: var(--sans); font-size: 15px; font-weight: 700; padding: 15px; border-radius: var(--radius-pill); text-decoration: none; border: none; cursor: pointer; transition: all 0.2s; }
+.faq-cta-btn:hover { background: white; transform: translateY(-2px); box-shadow: 0 6px 20px hsla(255,255,255,0.2); }
+.referral-note { display: flex; align-items: flex-start; gap: 12px; background: hsla(35, 95%, 55%, 0.1); border: 1px solid hsla(35, 95%, 55%, 0.2); border-radius: var(--radius); padding: 14px 16px; margin-top: 1.25rem; font-size: 13px; color: hsl(35, 95%, 70%); line-height: 1.6; }
+.referral-note svg { width: 18px; height: 18px; min-width: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; margin-top: 1px; }
+
+/* BOOKING FORM */
+.booking-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; align-items: start; margin-top: 2rem; }
+.booking-details { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
+.booking-detail-item { display: flex; align-items: flex-start; gap: 14px; padding: 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); backdrop-filter: blur(12px); transition: transform 0.2s; }
+.booking-detail-item:hover { transform: translateX(4px); border-color: var(--border-light); }
+.detail-icon { width: 40px; height: 40px; min-width: 40px; background: hsla(35, 95%, 55%, 0.1); border: 1px solid hsla(35, 95%, 55%, 0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+.detail-icon svg { width: 18px; height: 18px; stroke: var(--accent-base); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.detail-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-base); margin-bottom: 4px; }
+.detail-val { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+.form-card { background: var(--surface); border: 1px solid var(--border); backdrop-filter: blur(12px); border-radius: var(--radius-lg); padding: 2.5rem; box-shadow: 0 20px 40px hsla(0,0%,0%,0.3); }
+.form-title { font-family: var(--serif); font-size: 22px; font-weight: 800; color: var(--text); margin-bottom: 2rem; padding-bottom: 1.25rem; border-bottom: 1px solid hsla(255,255,255,0.05); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.form-field { display: flex; flex-direction: column; gap: 8px; }
+.form-field.full { grid-column: 1 / -1; }
+.form-field label { font-size: 13px; font-weight: 600; color: var(--text); letter-spacing: 0.02em; }
+.form-field input, .form-field select, .form-field textarea { font-family: var(--sans); font-size: 15px; color: var(--text); background: hsla(0,0%,0%,0.2); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; outline: none; transition: all 0.2s; width: 100%; appearance: none; }
+.form-field input::placeholder, .form-field textarea::placeholder { color: hsla(255,255,255,0.3); }
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--accent-base); box-shadow: 0 0 0 3px hsla(35, 95%, 55%, 0.15); background: hsla(0,0%,0%,0.4); }
+.form-field select { cursor: pointer; }
+.form-field select option { background: var(--surface-solid); color: var(--text); }
+.form-field textarea { min-height: 110px; resize: vertical; line-height: 1.6; }
+
+.form-submit-btn { display: block; width: 100%; background: var(--accent); color: white; font-family: var(--sans); font-size: 16px; font-weight: 700; padding: 16px; border-radius: var(--radius-pill); border: none; cursor: pointer; transition: all 0.2s; margin-top: 1rem; }
+.form-submit-btn:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 6px 20px hsla(35, 95%, 55%, 0.4); }
+.form-note { font-size: 13px; color: var(--text-muted); line-height: 1.7; margin-top: 1.5rem; text-align: center; }
+
+/* FOOTER */
+footer { background: var(--surface-solid); border-top: 1px solid var(--border); padding: 4rem 2rem 2.5rem; position: relative; overflow: hidden; }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; position: relative; z-index: 1; }
+.footer-brand { display: flex; flex-direction: column; gap: 1rem; }
+.footer-logo-wrap { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 18px; font-weight: 800; color: var(--text); text-decoration: none; }
+.footer-logo-icon { width: 30px; height: 30px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px hsla(35, 95%, 55%, 0.3); }
+.footer-logo-icon svg { width: 15px; height: 15px; stroke: white; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.footer-brand-sub { font-size: 14px; color: var(--text-muted); line-height: 1.7; max-width: 240px; }
+.footer-col-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent-base); display: inline-block; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: 14px; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--accent-base); }
+.footer-bottom { max-width: 1200px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid hsla(255,255,255,0.05); font-size: 13px; color: hsla(255,255,255,0.4); text-align: center; position: relative; z-index: 1; }
+
+/* BEFORE & AFTER GALLERY */
+.ba-section { position: relative; overflow: hidden; }
+.ba-header { text-align: center; margin-bottom: 4rem; }
+.ba-header .section-sub { margin: 0 auto; }
+
+.ba-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+
+.ba-card { background: var(--surface); border: 1px solid var(--border); backdrop-filter: blur(12px); border-radius: var(--radius-lg); overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+.ba-card:hover { border-color: var(--border-light); box-shadow: 0 20px 50px hsla(0,0%,0%,0.5); transform: translateY(-4px); }
+
+.ba-slider-wrap { position: relative; width: 100%; aspect-ratio: 1/1; overflow: hidden; cursor: ew-resize; user-select: none; -webkit-user-select: none; }
+
+.ba-img-after { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ba-img-before-clip { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; }
+.ba-img-before { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.ba-divider { position: absolute; top: 0; bottom: 0; width: 3px; background: white; z-index: 10; pointer-events: none; box-shadow: 0 0 12px hsla(0,0%,0%,0.5); }
+.ba-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px hsla(0,0%,0%,0.4); z-index: 11; cursor: ew-resize; transition: transform 0.15s; }
+.ba-handle:hover { transform: translate(-50%, -50%) scale(1.15); }
+.ba-handle svg { width: 20px; height: 20px; stroke: var(--bg); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+.ba-label { position: absolute; bottom: 12px; padding: 6px 14px; border-radius: var(--radius-pill); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; z-index: 5; pointer-events: none; backdrop-filter: blur(8px); }
+.ba-label-before { left: 12px; background: hsla(0, 70%, 50%, 0.7); color: white; border: 1px solid hsla(0, 70%, 50%, 0.3); }
+.ba-label-after { right: 12px; background: hsla(140, 70%, 40%, 0.7); color: white; border: 1px solid hsla(140, 70%, 40%, 0.3); }
+
+.ba-card-body { padding: 1.5rem 1.75rem; }
+.ba-mistake { display: flex; align-items: center; gap: 8px; font-size: 13px; color: hsl(0, 70%, 65%); font-weight: 600; margin-bottom: 8px; }
+.ba-mistake svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.ba-fix { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+.ba-result { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: hsla(140, 70%, 40%, 0.08); border: 1px solid hsla(140, 70%, 40%, 0.15); border-radius: 10px; }
+.ba-result-icon { width: 32px; height: 32px; min-width: 32px; background: hsla(140, 70%, 40%, 0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.ba-result-icon svg { width: 16px; height: 16px; stroke: hsl(140, 70%, 50%); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.ba-result-text { font-size: 13px; color: hsl(140, 70%, 60%); font-weight: 600; line-height: 1.4; }
+
+.ba-cta-row { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 3rem; font-size: 15px; color: var(--text-muted); }
+.ba-cta-row a { color: var(--accent-base); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: gap 0.2s; }
+.ba-cta-row a:hover { gap: 10px; }
+.ba-cta-row a svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+/* MISTAKES / PROBLEM SECTION */
+.mistakes-section { position: relative; overflow: hidden; }
+.mistakes-header { text-align: center; margin-bottom: 4rem; }
+.mistakes-header .section-sub { margin: 0 auto; }
+.mistakes-header .section-title span { color: hsl(0, 70%, 60%); }
+
+.mistakes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+.mistake-card { background: var(--surface); border: 1px solid var(--border); backdrop-filter: blur(12px); border-radius: var(--radius-lg); overflow: hidden; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); position: relative; }
+.mistake-card:hover { transform: translateY(-6px); border-color: hsla(0,70%,50%,0.4); box-shadow: 0 20px 50px hsla(0,0%,0%,0.5); }
+.mistake-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, hsl(0,70%,55%), hsl(0,50%,40%)); z-index: 2; }
+
+.mistake-phone { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: hsla(0,0%,0%,0.3); }
+.mistake-phone img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; filter: grayscale(30%); transition: all 0.3s; }
+.mistake-card:hover .mistake-phone img { opacity: 0.85; filter: grayscale(0%); }
+
+.mistake-swipe { position: absolute; top: 12px; right: 12px; display: flex; align-items: center; gap: 6px; background: hsla(0,70%,50%,0.85); backdrop-filter: blur(8px); color: white; font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 12px; border-radius: var(--radius-pill); z-index: 3; }
+.mistake-swipe svg { width: 14px; height: 14px; stroke: white; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+.mistake-num { position: absolute; top: 12px; left: 12px; width: 32px; height: 32px; background: hsla(0,0%,0%,0.6); backdrop-filter: blur(8px); border: 1px solid hsla(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 14px; font-weight: 800; color: white; z-index: 3; }
+
+.mistake-body { padding: 1.75rem; }
+.mistake-title { font-family: var(--serif); font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+.mistake-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; }
+
+.mistake-stat { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: hsla(0,70%,50%,0.08); border: 1px solid hsla(0,70%,50%,0.15); border-radius: 10px; }
+.mistake-stat-icon { width: 28px; height: 28px; min-width: 28px; background: hsla(0,70%,50%,0.15); border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+.mistake-stat-icon svg { width: 14px; height: 14px; stroke: hsl(0,70%,60%); fill: none; stroke-width: 2.5; }
+.mistake-stat-text { font-size: 12px; font-weight: 600; color: hsl(0,70%,65%); line-height: 1.4; }
+
+.mistakes-bottom { text-align: center; margin-top: 3rem; }
+.mistakes-bottom-text { font-size: 17px; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.7; }
+.mistakes-bottom-text strong { color: var(--text); font-weight: 700; }
+.mistakes-bottom-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: white; font-family: var(--sans); font-size: 15px; font-weight: 700; padding: 14px 32px; border-radius: var(--radius-pill); text-decoration: none; border: none; cursor: pointer; transition: all 0.2s; }
+.mistakes-bottom-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px hsla(35,95%,55%,0.4); }
+.mistakes-bottom-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+/* TESTIMONIALS */
+.testi-section { position: relative; overflow: hidden; }
+.testi-header { text-align: center; margin-bottom: 3.5rem; }
+.testi-header .section-sub { margin: 0 auto; }
+.testi-stats { display: flex; justify-content: center; gap: 3rem; margin-top: 2rem; }
+.testi-stat { text-align: center; }
+.testi-stat-num { font-family: var(--serif); font-size: 36px; font-weight: 800; background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
+.testi-stat-label { font-size: 13px; color: var(--text-muted); font-weight: 500; margin-top: 6px; }
+
+.testi-marquee { display: flex; gap: 1.5rem; width: max-content; }
+.testi-track { display: flex; gap: 1.5rem; animation: marquee 45s linear infinite; }
+.testi-track:hover { animation-play-state: paused; }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+.testi-card { width: 360px; flex-shrink: 0; background: var(--surface); border: 1px solid var(--border); backdrop-filter: blur(12px); border-radius: var(--radius-lg); padding: 2rem; transition: all 0.3s; position: relative; }
+.testi-card:hover { border-color: var(--border-light); box-shadow: 0 16px 40px hsla(0,0%,0%,0.4); transform: translateY(-4px); }
+.testi-card.highlight { border-color: hsla(35,95%,55%,0.4); background: linear-gradient(180deg, hsla(222,47%,15%,0.6), hsla(222,47%,10%,0.6)); }
+
+.testi-stars { display: flex; gap: 3px; margin-bottom: 1rem; }
+.testi-stars svg { width: 16px; height: 16px; fill: hsl(35,95%,55%); stroke: none; }
+.testi-quote { font-size: 15px; color: var(--text); line-height: 1.7; margin-bottom: 1.5rem; font-style: italic; }
+.testi-quote strong { font-style: normal; color: var(--accent-base); }
+
+.testi-author { display: flex; align-items: center; gap: 12px; padding-top: 1.25rem; border-top: 1px solid hsla(255,255,255,0.06); }
+.testi-avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border-light); }
+.testi-name { font-size: 14px; font-weight: 700; color: var(--text); }
+.testi-meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.testi-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; color: hsl(140,70%,55%); background: hsla(140,70%,40%,0.1); border: 1px solid hsla(140,70%,40%,0.15); padding: 3px 10px; border-radius: var(--radius-pill); margin-top: 6px; }
+.testi-badge svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+
+/* MEET THE EXPERT */
+.expert-section { position: relative; overflow: hidden; background: hsla(222, 47%, 8%, 0.5); }
+.expert-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: center; }
+.expert-img-wrap { position: relative; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); box-shadow: 0 30px 60px hsla(0,0%,0%,0.5); }
+.expert-img { width: 100%; height: auto; display: block; filter: contrast(1.05); }
+.expert-badge { position: absolute; bottom: 2rem; right: 2rem; background: var(--bg); border: 1px solid var(--border); padding: 1.5rem; border-radius: var(--radius); backdrop-filter: blur(12px); box-shadow: 0 10px 30px hsla(0,0%,0%,0.3); text-align: center; }
+.expert-badge-title { font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+.expert-badge-name { font-family: var(--serif); font-size: 18px; font-weight: 800; color: var(--accent-base); }
+
+.expert-content { position: relative; }
+.expert-quote { font-family: var(--serif); font-size: 24px; font-weight: 600; line-height: 1.5; color: var(--text); margin-bottom: 2rem; position: relative; }
+.expert-quote::before { content: '"'; position: absolute; top: -1.5rem; left: -2rem; font-size: 120px; color: hsla(35, 95%, 55%, 0.1); font-family: var(--serif); line-height: 1; }
+.expert-bio { font-size: 16px; color: var(--text-muted); line-height: 1.8; margin-bottom: 2.5rem; }
+.expert-bio p { margin-bottom: 1.5rem; }
+.expert-signature { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 300; color: var(--text); font-style: italic; opacity: 0.8; }
+
+.expert-trust { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding-top: 2.5rem; border-top: 1px solid hsla(255,255,255,0.06); }
+.trust-item { display: flex; align-items: flex-start; gap: 12px; }
+.trust-icon { width: 36px; height: 36px; background: hsla(35, 95%, 55%, 0.1); border: 1px solid hsla(35, 95%, 55%, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.trust-icon svg { width: 18px; height: 18px; stroke: var(--accent-base); fill: none; stroke-width: 2; }
+.trust-text { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+.trust-text strong { display: block; color: var(--text); margin-bottom: 2px; }
+
+/* LEAD MAGNET */
+.lead-section { position: relative; padding: 4rem 2rem; }
+.lead-card { 
+  max-width: 1000px; margin: 0 auto; background: linear-gradient(135deg, hsla(222, 47%, 15%, 0.9), hsla(222, 47%, 8%, 0.9)); 
+  border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 4rem; position: relative; overflow: hidden;
+  box-shadow: 0 40px 100px hsla(0,0%,0%,0.6);
+}
+.lead-card::after { 
+  content: ''; position: absolute; top: -50%; right: -20%; width: 500px; height: 500px; 
+  background: radial-gradient(circle, hsla(35, 95%, 55%, 0.1) 0%, transparent 70%); 
+  filter: blur(60px); pointer-events: none;
+}
+
+.lead-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.lead-badge { 
+  display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--accent); color: white; padding: 6px 14px; border-radius: var(--radius-pill); margin-bottom: 1.5rem;
+}
+.lead-title { font-family: var(--serif); font-size: 32px; font-weight: 800; color: var(--text); line-height: 1.2; margin-bottom: 1rem; }
+.lead-desc { font-size: 16px; color: var(--text-muted); line-height: 1.7; margin-bottom: 2rem; }
+
+.lead-form { display: flex; gap: 12px; }
+.lead-input { 
+  flex: 1; background: hsla(222, 47%, 5%, 0.5); border: 1px solid var(--border); border-radius: var(--radius-pill);
+  padding: 14px 24px; color: var(--text); font-family: var(--sans); font-size: 15px; outline: none; transition: border-color 0.2s;
+}
+.lead-input:focus { border-color: var(--accent-base); }
+.lead-btn { 
+  background: var(--accent); color: white; border: none; padding: 14px 32px; border-radius: var(--radius-pill);
+  font-family: var(--sans); font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.lead-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px hsla(35, 95%, 55%, 0.4); }
+
+.lead-visual { position: relative; }
+.lead-book-mockup { 
+  width: 100%; height: auto; border-radius: 8px; box-shadow: 20px 20px 60px hsla(0,0%,0%,0.5); 
+  transform: perspective(1000px) rotateY(-15deg) rotateX(10deg); transition: transform 0.5s;
+}
+.lead-card:hover .lead-book-mockup { transform: perspective(1000px) rotateY(-5deg) rotateX(5deg); }
+
+.lead-features { list-style: none; margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.lead-feature { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); font-weight: 600; }
+.lead-feature svg { width: 16px; height: 16px; stroke: var(--accent-base); fill: none; stroke-width: 3; }
+
+/* FLOATING CTA */
+.floating-cta {
+  position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px);
+  z-index: 1000; width: calc(100% - 3rem); max-width: 400px;
+  background: hsla(222, 47%, 15%, 0.8); backdrop-filter: blur(16px);
+  border: 1px solid var(--border-light); border-radius: var(--radius-pill);
+  padding: 12px; display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 20px 40px hsla(0,0%,0%,0.5), 0 0 0 1px hsla(255,255,255,0.05);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: auto;
+}
+.floating-cta.visible { transform: translateX(-50%) translateY(0); }
+.floating-text { padding-left: 1rem; }
+.floating-title { font-size: 14px; font-weight: 700; color: var(--text); }
+.floating-sub { font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.floating-btn {
+  background: var(--accent); color: white; border: none; padding: 10px 24px; border-radius: var(--radius-pill);
+  font-family: var(--sans); font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s;
+}
+.floating-btn:hover { background: var(--accent-hover); box-shadow: 0 4px 12px hsla(35,95%,55%,0.3); }
+
+@media (min-width: 961px) {
+  .floating-cta { display: none; }
+}
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-d1 { transition-delay: 0.15s; }
+.reveal-d2 { transition-delay: 0.3s; }
+
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem; }
+  .hero-right { height: 400px; }
+  section { padding: 4rem 1.5rem; }
+  .pkg-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .ba-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .mistakes-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+  .testi-card { width: 300px; }
+  .testi-stats { gap: 2rem; }
+  .expert-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .expert-img-wrap { max-width: 500px; margin: 0 auto; }
+  .lead-grid { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
+  .lead-card { padding: 3rem 1.5rem; }
+  .lead-form { flex-direction: column; }
+  .lead-features { grid-template-columns: 1fr; text-align: left; }
+  .process-grid, .faq-layout, .booking-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .faq-cta-card { position: static; margin-top: 2rem; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-field.full { grid-column: 1; }
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .cta-banner { margin: 2rem 1.5rem 4rem; padding: 3rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+<div class="bg-glow-2"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    </div>
+    Match Ready
+  </a>
+  <ul class="nav-links">
+    <li><a href="#results">Results</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#process">How it works</a></li>
+    <li><a href="#expert">About</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#book" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div style="max-width:1240px;margin:0 auto;">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-badge reveal">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        Dating profile photography for men
+      </div>
+      <h1 class="hero-title reveal reveal-d1">Find a photo that <span>works for you</span></h1>
+      <p class="hero-sub reveal reveal-d2">Professional shoot, style consulting, grooming guidance, and a full profile audit — everything you need to actually get matches.</p>
+
+      <div class="hero-search-bar reveal reveal-d2">
+        <div class="search-field">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <input type="text" placeholder="Your city">
+        </div>
+        <div class="search-field">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <input type="text" placeholder="Timeframe">
+        </div>
+        <div class="search-field" style="border-right:none;">
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+          <select><option value="">Package</option><option>Starter — $149</option><option>Overhaul — $299</option><option>Full Treatment — $549</option></select>
+        </div>
+        <button class="hero-search-btn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book Now</button>
+      </div>
+
+      <div class="hero-cities reveal reveal-d2">
+        <span class="city-tag">New York</span>
+        <span class="city-tag">Los Angeles</span>
+        <span class="city-tag">Chicago</span>
+        <span class="city-tag">Atlanta</span>
+        <span class="city-tag">+ more cities</span>
+      </div>
+    </div>
+
+    <div class="hero-right reveal reveal-d1">
+      <div class="hero-stat-card">
+        <div class="stat-item"><div class="stat-num">3×</div><div class="stat-label">Match increase</div></div>
+        <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Day delivery</div></div>
+        <div class="stat-item"><div class="stat-num">4+</div><div class="stat-label">Cities</div></div>
+      </div>
+      <div class="hero-img-overlay">
+        <div class="hero-img-text">Look your best on every app</div>
+        <div class="hero-img-sub">Hinge · Bumble · Tinder · The League</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MISTAKES / WHY YOU'RE NOT GETTING MATCHES -->
+<section class="mistakes-section">
+  <div class="container">
+    <div class="mistakes-header reveal">
+      <span class="section-tag">The problem</span>
+      <h2 class="section-title">Why you're <span>not getting matches</span></h2>
+      <p class="section-sub">It's not your face. It's your photos. Here are the three mistakes killing your profile right now.</p>
+    </div>
+
+    <div class="mistakes-grid">
+      <div class="mistake-card reveal reveal-d1">
+        <div class="mistake-phone">
+          <img src="https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?auto=format&fit=crop&w=800&q=80" alt="Low-effort selfie example" loading="lazy">
+          <div class="mistake-num">1</div>
+          <div class="mistake-swipe"><svg viewBox="0 0 24 24"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg> Swipe left</div>
+        </div>
+        <div class="mistake-body">
+          <div class="mistake-title">The Low-Effort Selfie</div>
+          <div class="mistake-desc">Bathroom mirror. Fluorescent light. Cluttered background. It tells her you don't care — and the algorithm buries you for it.</div>
+          <div class="mistake-stat">
+            <div class="mistake-stat-icon"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+            <div class="mistake-stat-text">Selfies get 40% fewer right-swipes than directed photos</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mistake-card reveal reveal-d1">
+        <div class="mistake-phone">
+          <img src="images/before-2.png" alt="Cropped group photo example" loading="lazy">
+          <div class="mistake-num">2</div>
+          <div class="mistake-swipe"><svg viewBox="0 0 24 24"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg> Swipe left</div>
+        </div>
+        <div class="mistake-body">
+          <div class="mistake-title">The Group Photo Confusion</div>
+          <div class="mistake-desc">She's swiping fast. If she can't tell which one is you in 0.5 seconds, she's gone. Sunglasses and cropped arms make it worse.</div>
+          <div class="mistake-stat">
+            <div class="mistake-stat-icon"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+            <div class="mistake-stat-text">Group-photo leads get 70% fewer conversations</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mistake-card reveal reveal-d2">
+        <div class="mistake-phone">
+          <img src="images/before-3.png" alt="Car selfie example" loading="lazy">
+          <div class="mistake-num">3</div>
+          <div class="mistake-swipe"><svg viewBox="0 0 24 24"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg> Swipe left</div>
+        </div>
+        <div class="mistake-body">
+          <div class="mistake-title">The Zero-Context Shot</div>
+          <div class="mistake-desc">Car selfie. Gym mirror. Couch snap. No story, no personality, no effort. It screams "I have nothing going on" — even if you do.</div>
+          <div class="mistake-stat">
+            <div class="mistake-stat-icon"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+            <div class="mistake-stat-text">Women spend 1.5 sec on your first photo — make it count</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mistakes-bottom reveal">
+      <p class="mistakes-bottom-text"><strong>Sound familiar?</strong> You're not alone. These are the top 3 mistakes I fix every single week.</p>
+      <button class="mistakes-bottom-btn" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})">
+        See the fix
+        <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE & AFTER GALLERY -->
+<section class="ba-section" id="results">
+  <div class="container">
+    <div class="ba-header reveal">
+      <span class="section-tag">Real results</span>
+      <h2 class="section-title">See the difference</h2>
+      <p class="section-sub">Drag the slider to compare. Same guys — just better photos, better lighting, and actual direction.</p>
+    </div>
+
+    <div class="ba-grid">
+      <!-- Card 1: Bathroom Selfie -->
+      <div class="ba-card reveal reveal-d1">
+        <div class="ba-slider-wrap" data-ba-slider>
+          <img class="ba-img-after" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" alt="Professional portrait" loading="lazy">
+          <div class="ba-img-before-clip" style="width:50%">
+            <img class="ba-img-before" src="https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?auto=format&fit=crop&w=800&q=80" alt="Bathroom mirror selfie" loading="lazy">
+          </div>
+          <div class="ba-divider" style="left:50%"></div>
+          <div class="ba-handle" style="left:50%">
+            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 15 12 9 6" transform="translate(6,0)"/></svg>
+          </div>
+          <span class="ba-label ba-label-before">Before</span>
+          <span class="ba-label ba-label-after">After</span>
+        </div>
+        <div class="ba-card-body">
+          <div class="ba-mistake">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            The bathroom mirror selfie
+          </div>
+          <div class="ba-fix">Harsh fluorescent lighting, cluttered background, no effort. Replaced with a directed outdoor shoot in golden hour light.</div>
+          <div class="ba-result">
+            <div class="ba-result-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+            <div class="ba-result-text">3× more matches in first week</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Party Crop -->
+      <div class="ba-card reveal reveal-d1">
+        <div class="ba-slider-wrap" data-ba-slider>
+          <img class="ba-img-after" src="images/after-2.png" alt="Professional portrait – cafe shot" loading="lazy">
+          <div class="ba-img-before-clip" style="width:50%">
+            <img class="ba-img-before" src="images/before-2.png" alt="Cropped party photo with sunglasses" loading="lazy">
+          </div>
+          <div class="ba-divider" style="left:50%"></div>
+          <div class="ba-handle" style="left:50%">
+            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 15 12 9 6" transform="translate(6,0)"/></svg>
+          </div>
+          <span class="ba-label ba-label-before">Before</span>
+          <span class="ba-label ba-label-after">After</span>
+        </div>
+        <div class="ba-card-body">
+          <div class="ba-mistake">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            The cropped group photo
+          </div>
+          <div class="ba-fix">Sunglasses indoors, someone else's arm, harsh flash. Replaced with a warm, natural cafe portrait that shows his actual face.</div>
+          <div class="ba-result">
+            <div class="ba-result-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+            <div class="ba-result-text">First date booked within 5 days</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Car Selfie -->
+      <div class="ba-card reveal reveal-d2">
+        <div class="ba-slider-wrap" data-ba-slider>
+          <img class="ba-img-after" src="images/after-1.png" alt="Professional portrait – urban brick wall" loading="lazy">
+          <div class="ba-img-before-clip" style="width:50%">
+            <img class="ba-img-before" src="images/before-3.png" alt="Car selfie with seatbelt" loading="lazy">
+          </div>
+          <div class="ba-divider" style="left:50%"></div>
+          <div class="ba-handle" style="left:50%">
+            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 15 12 9 6" transform="translate(6,0)"/></svg>
+          </div>
+          <span class="ba-label ba-label-before">Before</span>
+          <span class="ba-label ba-label-after">After</span>
+        </div>
+        <div class="ba-card-body">
+          <div class="ba-mistake">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            The car selfie
+          </div>
+          <div class="ba-fix">Unflattering angle, zero effort, messy background. Replaced with a confident, styled portrait in natural light.</div>
+          <div class="ba-result">
+            <div class="ba-result-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+            <div class="ba-result-text">"I actually feel confident now"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ba-cta-row reveal">
+      <span>Want results like these?</span>
+      <a href="#book">
+        Book your shoot
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="packages-section" id="packages">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">Packages</span>
+      <h2 class="section-title">Choose your level</h2>
+      <p class="section-sub">All shoots include professional editing and digital delivery within 5 business days. A 50% deposit holds your date.</p>
+    </div>
+    <div class="pkg-grid reveal reveal-d1">
+      <div class="pkg-card">
+        <div style="min-height:30px;margin-bottom:1.5rem;"></div>
+        <div class="pkg-name">Starter</div>
+        <div class="pkg-tagline">Photos only</div>
+        <div class="pkg-price"><span class="pkg-dollar">$</span><span class="pkg-amount">149</span></div>
+        <ul class="pkg-features">
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>1-hour outdoor shoot, 1–2 looks</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>15 edited, delivery-ready photos</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Shot direction included</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Digital delivery in 5 business days</li>
+        </ul>
+        <button class="pkg-btn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book Starter</button>
+      </div>
+
+      <div class="pkg-card featured">
+        <div class="pkg-featured-badge">Most popular</div>
+        <div class="pkg-name">Profile Overhaul</div>
+        <div class="pkg-tagline">Photos + full audit</div>
+        <div class="pkg-price"><span class="pkg-dollar">$</span><span class="pkg-amount">299</span></div>
+        <ul class="pkg-features">
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>25 photos, 2–3 looks</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Pre-shoot style consult</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Full profile audit — photos, bio, prompts</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Platform tips: Hinge, Bumble, Tinder</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>30-min follow-up call</li>
+        </ul>
+        <button class="pkg-btn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book Overhaul</button>
+      </div>
+
+      <div class="pkg-card">
+        <div style="min-height:30px;margin-bottom:1.5rem;"></div>
+        <div class="pkg-name">Full Treatment</div>
+        <div class="pkg-tagline">Everything handled</div>
+        <div class="pkg-price"><span class="pkg-dollar">$</span><span class="pkg-amount">549</span></div>
+        <ul class="pkg-features">
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>35 photos, 3 looks, multi-location</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Full pre-shoot styling session</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Personalized grooming guide PDF</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Bio rewrite included</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>2 profile audit revisions</li>
+        </ul>
+        <button class="pkg-btn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book Full Treatment</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADD-ONS -->
+<section class="addons-section">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">Add-ons</span>
+      <h2 class="section-title">Standalone or on top of any package</h2>
+    </div>
+    <div class="addons-grid reveal reveal-d1">
+      <div class="addon-card">
+        <div class="addon-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <div class="addon-name">Profile audit only</div>
+        <div class="addon-desc">No shoot needed. Remote, async delivery.</div>
+        <div class="addon-price">$49</div>
+      </div>
+      <div class="addon-card">
+        <div class="addon-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+        <div class="addon-name">Bio + prompt rewrite</div>
+        <div class="addon-desc">Async, delivered in 48 hours.</div>
+        <div class="addon-price">$49</div>
+      </div>
+      <div class="addon-card">
+        <div class="addon-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
+        <div class="addon-name">Grooming guide</div>
+        <div class="addon-desc">Personalized PDF for your face + hair.</div>
+        <div class="addon-price">$49</div>
+      </div>
+      <div class="addon-card">
+        <div class="addon-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="addon-name">Rush delivery</div>
+        <div class="addon-desc">Photos in 48 hours instead of 5 days.</div>
+        <div class="addon-price">+$75</div>
+      </div>
+      <div class="addon-card">
+        <div class="addon-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="addon-name">Extra location</div>
+        <div class="addon-desc">Add a third shoot spot to any package.</div>
+        <div class="addon-price">+$50</div>
+      </div>
+      <div class="addon-card">
+        <div class="addon-icon"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
+        <div class="addon-name">Travel fee</div>
+        <div class="addon-desc">Outside home city. Varies by distance.</div>
+        <div class="addon-price">$99–150</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section" id="testimonials">
+  <div class="container">
+    <div class="testi-header reveal">
+      <span class="section-tag">Wall of love</span>
+      <h2 class="section-title">What clients are saying</h2>
+      <p class="section-sub">Real feedback from real guys who stopped guessing and got results.</p>
+      <div class="testi-stats">
+        <div class="testi-stat"><div class="testi-stat-num">200+</div><div class="testi-stat-label">Clients shot</div></div>
+        <div class="testi-stat"><div class="testi-stat-num">4.9</div><div class="testi-stat-label">Avg rating</div></div>
+        <div class="testi-stat"><div class="testi-stat-num">93%</div><div class="testi-stat-label">Report more matches</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="testi-marquee reveal">
+    <div class="testi-track">
+
+      <div class="testi-card highlight">
+        <div class="testi-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <div class="testi-quote">"My matches went from <strong>2 a week to 15+</strong> within days of updating my photos. I met my girlfriend a month later. Best money I've ever spent."</div>
+        <div class="testi-author"><img class="testi-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" alt="David"><div><div class="testi-name">David, 28</div><div class="testi-meta">New York · Profile Overhaul</div><div class="testi-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Verified client</div></div></div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <div class="testi-quote">"I've never been comfortable in front of a camera. He made the whole thing feel natural. The grooming guide alone was worth the price."</div>
+        <div class="testi-author"><img class="testi-avatar" src="images/after-2.png" alt="Marcus"><div><div class="testi-name">Marcus, 31</div><div class="testi-meta">Chicago · Full Treatment</div><div class="testi-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Verified client</div></div></div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <div class="testi-quote">"The profile audit changed everything. He rewrote my bio, reordered my photos, and I went from <strong>zero likes to 40+ in a weekend</strong>."</div>
+        <div class="testi-author"><img class="testi-avatar" src="images/after-1.png" alt="James"><div><div class="testi-name">James, 26</div><div class="testi-meta">Atlanta · Profile Overhaul</div><div class="testi-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Verified client</div></div></div>
+      </div>
+
+      <div class="testi-card highlight">
+        <div class="testi-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <div class="testi-quote">"I was skeptical about paying for dating photos. After the shoot, <strong>I had 3 dates lined up in one week</strong>. My friends couldn't believe the difference."</div>
+        <div class="testi-author"><img class="testi-avatar" src="images/after-2.png" alt="Kevin"><div><div class="testi-name">Kevin, 33</div><div class="testi-meta">Los Angeles · Full Treatment</div><div class="testi-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Verified client</div></div></div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <div class="testi-quote">"Honestly the best investment in myself I've made. The style consult opened my eyes — I was dressing completely wrong for my body type."</div>
+        <div class="testi-author"><img class="testi-avatar" src="images/after-1.png" alt="Ryan"><div><div class="testi-name">Ryan, 29</div><div class="testi-meta">New York · Starter</div><div class="testi-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Verified client</div></div></div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <div class="testi-quote">"Got the Overhaul package. He completely rebuilt my Hinge profile. <strong>My match quality skyrocketed</strong> — I'm talking actual women I want to date."</div>
+        <div class="testi-author"><img class="testi-avatar" src="images/after-2.png" alt="Andre"><div><div class="testi-name">Andre, 27</div><div class="testi-meta">Chicago · Profile Overhaul</div><div class="testi-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Verified client</div></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MEET THE EXPERT -->
+<section class="expert-section" id="expert">
+  <div class="container">
+    <div class="expert-grid">
+      <div class="expert-img-wrap reveal">
+        <img class="expert-img" src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=800&q=80" alt="Dating Profile Photography Expert">
+        <div class="expert-badge">
+          <div class="expert-badge-title">Lead Photographer</div>
+          <div class="expert-badge-name">Match Ready</div>
+        </div>
+      </div>
+
+      <div class="expert-content reveal reveal-d1">
+        <span class="section-tag">About me</span>
+        <h2 class="section-title">The guy behind <span>the lens</span></h2>
+        
+        <div class="expert-quote">
+          "Dating app success isn't about being a model. It's about signaling high-value effort and personality in under 2 seconds."
+        </div>
+
+        <div class="expert-bio">
+          <p>I started this service after watching my friends — smart, successful, interesting guys — fail miserably on dating apps because they were using photos that didn't reflect who they actually were.</p>
+          <p>With a background in portrait photography and a deep obsession with social psychology, I've spent the last 5 years perfecting the 'candid-but-curated' look that the Hinge and Bumble algorithms love.</p>
+          <div class="expert-signature">Cheers, Match Ready</div>
+        </div>
+
+        <div class="expert-trust">
+          <div class="trust-item">
+            <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+            <div class="trust-text"><strong>800+ Shoots</strong>5 years of specialized dating profile experience.</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 20v-6M6 20V10M18 20V4"/></svg></div>
+            <div class="trust-text"><strong>Algorithm Optimized</strong>Photos shot specifically for high-engagement.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <div class="container">
+    <div class="process-grid">
+      <div>
+        <div class="reveal">
+          <span class="section-tag">How it works</span>
+          <h2 class="section-title">From form to inbox-ready photos in under two weeks</h2>
+          <p class="section-sub">A streamlined process so you always know what's next.</p>
+        </div>
+        <div class="process-steps reveal reveal-d1">
+          <div class="process-step">
+            <div class="step-num">1</div>
+            <div>
+              <div class="step-title">Fill out the booking form</div>
+              <div class="step-detail">Takes 3 minutes. Covers your goals, style, and which package fits best.</div>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">2</div>
+            <div>
+              <div class="step-title">15-minute intro call</div>
+              <div class="step-detail">We lock in your date and go over the plan. Deposit invoice sent after — your date isn't held until it clears.</div>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">3</div>
+            <div>
+              <div class="step-title">Pre-shoot prep guide</div>
+              <div class="step-detail">Sent one week before. Covers exactly what to wear, grooming checklist, and day-of logistics.</div>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">4</div>
+            <div>
+              <div class="step-title">Shoot day</div>
+              <div class="step-detail">Fully directed session. I coach posture, expressions, and look transitions — no awkward guessing.</div>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">5</div>
+            <div>
+              <div class="step-title">Gallery in 5 days</div>
+              <div class="step-detail">High-res, app-ready photos via private gallery link. Profile audit follows within 48 hours for Tier 2 and 3.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-d2">
+        <div class="process-visual">
+          <div class="process-visual-title">Everything you need to actually stand out</div>
+          <div class="process-visual-wrapper">
+            <div class="process-highlight">
+              <svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+              <div class="process-highlight-text"><strong>Directed shoot</strong>I tell you exactly what to do — you just show up.</div>
+            </div>
+            <div class="process-highlight">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <div class="process-highlight-text"><strong>Profile audit included</strong>Tier 2 and 3 include a full review of your photos, bio, and prompts.</div>
+            </div>
+            <div class="process-highlight">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+              <div class="process-highlight-text"><strong>Grooming guidance</strong>Personalized hair, skin, and beard advice built for your face.</div>
+            </div>
+            <div class="process-highlight">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+              <div class="process-highlight-text"><strong>Referral program</strong>Share your code — you both get $25 off the next booking.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD MAGNET -->
+<section class="lead-section">
+  <div class="lead-card reveal">
+    <div class="lead-grid">
+      <div>
+        <span class="lead-badge">Free Guide</span>
+        <h2 class="lead-title">The 5 Photos Every Guy Needs on Hinge</h2>
+        <p class="lead-desc">Stop guessing. Get the exact blueprint for a high-converting profile — completely free.</p>
+        
+        <form class="lead-form" onsubmit="event.preventDefault(); this.innerHTML = '<p style=\'color:var(--accent-base);font-weight:700;\'>Guide sent! Check your inbox.</p>';">
+          <input type="email" class="lead-input" placeholder="Enter your email" required>
+          <button type="submit" class="lead-btn">Send me the guide</button>
+        </form>
+
+        <ul class="lead-features">
+          <li class="lead-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> The "First Slot" formula</li>
+          <li class="lead-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 3 bio mistakes to avoid</li>
+          <li class="lead-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Lighting for non-models</li>
+          <li class="lead-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> The "Canditude" secret</li>
+        </ul>
+      </div>
+
+      <div class="lead-visual reveal reveal-d1">
+        <img class="lead-book-mockup" src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=800&q=80" alt="Free Profile Guide Mockup">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner reveal">
+  <div class="cta-banner-title">Discover Your Best Photos</div>
+  <p class="cta-banner-sub">Stop guessing what's wrong with your profile. Let's fix it — professionally.</p>
+  <button class="cta-banner-btn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">
+    Book Now
+    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  </button>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="faq-layout">
+      <div>
+        <div class="reveal">
+          <span class="section-tag">FAQ</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <a href="#book" style="font-size:15px;color:var(--accent-base);font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-top:4px;">See all <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+        <div style="margin-top:2.5rem;" class="reveal reveal-d1">
+          <div class="faq-item">
+            <div class="faq-question"><div class="faq-q">Do I need to have outfits ready?</div><div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+            <div class="faq-a">No. If you're unsure what to wear, the pre-shoot style consult (included in Tier 2 and 3) covers exactly that. You can also send photos of what you're thinking and I'll give feedback before shoot day.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question"><div class="faq-q">What if I've never had professional photos taken?</div><div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+            <div class="faq-a">Most of my clients haven't. The entire session is directed — I tell you where to stand, how to move, and when to look at the camera. The first 15 minutes are always a warm-up.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question"><div class="faq-q">How do I pick the right package?</div><div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+            <div class="faq-a">If you just need better photos, Starter. If your whole profile needs work, Overhaul. If you want everything handled — style, grooming, bio — Full Treatment. When in doubt, Overhaul is the right call.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question"><div class="faq-q">What's the cancellation policy?</div><div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+            <div class="faq-a">Cancel 72+ hours out for a full refund. 24–72 hours converts to a 6-month credit. Under 24 hours or no-show, the deposit is forfeited. One free reschedule with 72+ hours notice — $35 fee on a second.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question"><div class="faq-q">Do you shoot outside your home city?</div><div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+            <div class="faq-a">Yes. A travel fee of $99–$150 applies outside my home city. I batch shoots in each city over a weekend trip — fill out the form and I'll confirm availability.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question"><div class="faq-q">Do you share before/after photos publicly?</div><div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+            <div class="faq-a">Only with explicit opt-in permission on the intake form. Usernames and identifying bio text are always blurred. You can withdraw consent any time.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-d2">
+        <div class="faq-cta-card">
+          <span class="section-tag">Ready?</span>
+          <div class="faq-cta-title">Let's get your profile right.</div>
+          <p class="faq-cta-sub">Fill out the booking form and I'll follow up within 24 hours to schedule your intro call. No commitment until the deposit.</p>
+          <button class="faq-cta-btn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book your shoot</button>
+          <div class="referral-note">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            <span>Have a referral code? Enter it on the booking form — you and your referrer both save $25.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING FORM -->
+<section class="booking-section" id="book">
+  <div class="container">
+    <div class="booking-layout">
+      <div>
+        <div class="reveal">
+          <span class="section-tag">Book your shoot</span>
+          <h2 class="section-title">Let's get started.</h2>
+          <p class="section-sub">Fill this out and I'll follow up within 24 hours to schedule your intro call.</p>
+        </div>
+        <div class="booking-details reveal reveal-d1">
+          <div class="booking-detail-item">
+            <div class="detail-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div><div class="detail-label">Response time</div><div class="detail-val">Within 24 hours to schedule your intro call.</div></div>
+          </div>
+          <div class="booking-detail-item">
+            <div class="detail-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div><div class="detail-label">No commitment yet</div><div class="detail-val">Your date isn't held until the 50% deposit is paid.</div></div>
+          </div>
+          <div class="booking-detail-item">
+            <div class="detail-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><div class="detail-label">Multiple cities</div><div class="detail-val">Include your city — I'll confirm availability and travel fee.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-d1">
+        <div class="form-card">
+          <div class="form-title">Your info</div>
+          <form onsubmit="handleSubmit(event)">
+            <div class="form-grid">
+              <div class="form-field"><label for="fname">First name</label><input type="text" id="fname" placeholder="James" required></div>
+              <div class="form-field"><label for="lname">Last name</label><input type="text" id="lname" placeholder="Carter" required></div>
+              <div class="form-field"><label for="email">Email</label><input type="email" id="email" placeholder="you@email.com" required></div>
+              <div class="form-field"><label for="phone">Phone</label><input type="tel" id="phone" placeholder="(555) 000-0000"></div>
+              <div class="form-field"><label for="city">Your city</label><input type="text" id="city" placeholder="Brooklyn, NY" required></div>
+              <div class="form-field">
+                <label for="package">Package</label>
+                <select id="package" required>
+                  <option value="" disabled selected>Select a package</option>
+                  <option>Starter — $149</option>
+                  <option>Profile Overhaul — $299</option>
+                  <option>Full Treatment — $549</option>
+                  <option>Add-on only</option>
+                </select>
+              </div>
+              <div class="form-field full"><label for="timeframe">Preferred timeframe</label><input type="text" id="timeframe" placeholder="e.g. any weekend in June, ASAP, flexible"></div>
+              <div class="form-field full"><label for="referral">Referral code (optional)</label><input type="text" id="referral" placeholder="e.g. MARCUS25"></div>
+              <div class="form-field full"><label for="notes">Anything I should know upfront?</label><textarea id="notes" placeholder="Goals, concerns, questions, current situation — whatever's on your mind."></textarea></div>
+              <div class="form-field full"><button type="submit" class="form-submit-btn" id="submit-btn">Send booking request</button></div>
+            </div>
+            <p class="form-note">By submitting you agree to the booking and cancellation policy. A 50% non-refundable deposit is required to hold your shoot date.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="footer-logo-wrap" href="#">
+        <div class="footer-logo-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+        Match Ready
+      </a>
+      <p class="footer-brand-sub">Dating profile photography for men. Professional shoots in multiple cities.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#book">Book Now</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#">Profile Audit</a></li>
+        <li><a href="#">Grooming Guide</a></li>
+        <li><a href="#">Bio Rewrite</a></li>
+        <li><a href="#">Style Consult</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Support</div>
+      <ul class="footer-links">
+        <li><a href="mailto:you@email.com">Email</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">TikTok</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Match Ready. All rights reserved. · New York · Los Angeles · Chicago · Atlanta</div>
+</footer>
+
+<!-- FLOATING CTA (Mobile) -->
+<div class="floating-cta" id="floatingCTA">
+  <div class="floating-text">
+    <div class="floating-title">Ready to level up?</div>
+    <div class="floating-sub">Profile shoots from $149</div>
+  </div>
+  <button class="floating-btn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book Now</button>
+</div>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, { threshold: 0.1 });
+reveals.forEach(el => obs.observe(el));
+
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-question').addEventListener('click', () => {
+    const open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!open) item.classList.add('open');
+  });
+});
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  btn.textContent = "Request sent — I'll be in touch within 24 hours.";
+  btn.style.background = '#4CAF50';
+  btn.style.pointerEvents = 'none';
+}
+
+// Floating CTA scroll logic
+const floatingCTA = document.getElementById('floatingCTA');
+const hero = document.querySelector('.hero');
+
+if (floatingCTA && hero) {
+  window.addEventListener('scroll', () => {
+    const heroHeight = hero.offsetHeight;
+    if (window.scrollY > heroHeight) {
+      floatingCTA.classList.add('visible');
+    } else {
+      floatingCTA.classList.remove('visible');
+    }
+  });
+}
+
+// Before & After Slider
+document.querySelectorAll('[data-ba-slider]').forEach(slider => {
+  const clip = slider.querySelector('.ba-img-before-clip');
+  const divider = slider.querySelector('.ba-divider');
+  const handle = slider.querySelector('.ba-handle');
+  let dragging = false;
+
+  function setPosition(x) {
+    const rect = slider.getBoundingClientRect();
+    let pct = ((x - rect.left) / rect.width) * 100;
+    pct = Math.max(2, Math.min(98, pct));
+    clip.style.width = pct + '%';
+    divider.style.left = pct + '%';
+    handle.style.left = pct + '%';
+  }
+
+  slider.addEventListener('mousedown', e => { dragging = true; setPosition(e.clientX); e.preventDefault(); });
+  slider.addEventListener('touchstart', e => { dragging = true; setPosition(e.touches[0].clientX); }, { passive: true });
+  window.addEventListener('mousemove', e => { if (dragging) setPosition(e.clientX); });
+  window.addEventListener('touchmove', e => { if (dragging) setPosition(e.touches[0].clientX); }, { passive: true });
+  window.addEventListener('mouseup', () => { dragging = false; });
+  window.addEventListener('touchend', () => { dragging = false; });
+});
+
+// Testimonials infinite marquee — duplicate cards for seamless loop
+document.querySelectorAll('.testi-track').forEach(track => {
+  const cards = track.innerHTML;
+  track.innerHTML = cards + cards;
+});
+</script>
+</body>
+</html>
