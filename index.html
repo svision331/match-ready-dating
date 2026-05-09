@@ -39,6 +39,13 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ba-slider-wrap {
+  position: relative; width: 100%; aspect-ratio: 4/5; overflow: hidden;
+  border-radius: var(--radius-lg); border: 1px solid var(--border);
+  cursor: ew-resize; touch-action: none;
 }
 
 /* GLOWS */
@@ -76,9 +83,16 @@ nav {
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 12px hsla(35, 95%, 55%, 0.3);
 }
-.nav-logo-icon svg { width: 18px; height: 18px; stroke: white; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.nav-logo-icon svg { width: 16px; height: 16px; fill: var(--bg); stroke: none; }
 
-.nav-links { display: flex; align-items: center; gap: 0.5rem; list-style: none; }
+.mobile-toggle {
+  display: none; width: 44px; height: 44px; align-items: center; justify-content: center;
+  background: hsla(255,255,255,0.05); border: 1px solid hsla(255,255,255,0.1); border-radius: 10px;
+  cursor: pointer; color: var(--text); padding: 0;
+}
+.mobile-toggle svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; }
+
+.nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
 .nav-links a {
   font-size: 14px; font-weight: 500; color: var(--text-muted); text-decoration: none;
   padding: 8px 16px; border-radius: var(--radius-pill); transition: all 0.2s;
@@ -541,6 +555,16 @@ footer { background: var(--surface-solid); border-top: 1px solid var(--border); 
 .reveal-d2 { transition-delay: 0.3s; }
 
 @media (max-width: 960px) {
+  .nav-links { display: none; }
+  .mobile-toggle { display: flex; }
+  .hero-title { font-size: 38px; line-height: 1.1; }
+  .hero-sub { font-size: 16px; }
+  .section-title { font-size: 28px; }
+  
+  .hero-search { flex-direction: column; width: 100%; max-width: none; border-radius: 20px; overflow: hidden; gap: 0; }
+  .search-field { width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 16px 20px; }
+  .hero-search-btn { width: 100%; padding: 18px; border-radius: 0; font-size: 16px; }
+
   .hero { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem; }
   .hero-right { height: 400px; }
   section { padding: 4rem 1.5rem; }
@@ -562,6 +586,14 @@ footer { background: var(--surface-solid); border-top: 1px solid var(--border); 
   .footer-inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
   .cta-banner { margin: 2rem 1.5rem 4rem; padding: 3rem 1.5rem; }
 }
+
+/* MOBILE NAV OPEN STATE */
+.nav.open { height: auto; background: hsla(222, 47%, 5%, 0.98); backdrop-filter: blur(20px); border-bottom: 1px solid hsla(255,255,255,0.1); }
+.nav.open .nav-links { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; padding: 2rem 1.5rem 3rem; background: inherit; border-bottom: 1px solid hsla(255,255,255,0.1); gap: 1.5rem; }
+.nav.open .nav-links li { width: 100%; }
+.nav.open .nav-links li a { font-size: 18px; display: block; padding: 0.5rem 0; }
+.nav.open .nav-cta { width: 100%; text-align: center; padding: 16px; font-size: 16px; margin-top: 0.5rem; }
+
 </style>
 </head>
 <body>
@@ -577,6 +609,9 @@ footer { background: var(--surface-solid); border-top: 1px solid var(--border); 
     </div>
     Match Ready
   </a>
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+    <svg viewBox="0 0 24 24" id="toggleIcon"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
   <ul class="nav-links">
     <li><a href="#results">Results</a></li>
     <li><a href="#packages">Packages</a></li>
@@ -1287,6 +1322,30 @@ footer { background: var(--surface-solid); border-top: 1px solid var(--border); 
 </div>
 
 <script>
+// Mobile Nav Toggle
+const mobileToggle = document.getElementById('mobileToggle');
+const nav = document.querySelector('nav');
+const toggleIcon = document.getElementById('toggleIcon');
+
+if (mobileToggle) {
+  mobileToggle.addEventListener('click', () => {
+    nav.classList.toggle('open');
+    if (nav.classList.contains('open')) {
+      toggleIcon.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>';
+    } else {
+      toggleIcon.innerHTML = '<line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>';
+    }
+  });
+
+  // Close menu on link click
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      toggleIcon.innerHTML = '<line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>';
+    });
+  });
+}
+
 const reveals = document.querySelectorAll('.reveal');
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
