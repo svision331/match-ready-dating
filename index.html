@@ -370,7 +370,11 @@ footer { background: var(--surface-solid); border-top: 1px solid var(--border); 
 .ba-card { background: var(--surface); border: 1px solid var(--border); backdrop-filter: blur(12px); border-radius: var(--radius-lg); overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 .ba-card:hover { border-color: var(--border-light); box-shadow: 0 20px 50px hsla(0,0%,0%,0.5); transform: translateY(-4px); }
 
-.ba-slider-wrap { position: relative; width: 100%; aspect-ratio: 1/1; overflow: hidden; cursor: ew-resize; user-select: none; -webkit-user-select: none; }
+.ba-slider-wrap { 
+  position: relative; width: 100%; aspect-ratio: 1/1; overflow: hidden; 
+  cursor: ew-resize; user-select: none; -webkit-user-select: none;
+  touch-action: none; /* Prevents screen scrolling while sliding */
+}
 
 .ba-img-after { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .ba-img-before-clip { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; }
@@ -1471,6 +1475,7 @@ document.querySelectorAll('[data-ba-slider]').forEach(slider => {
     slider.style.cursor = 'grabbing';
     const x = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
     setPosition(x);
+    if (e.type === 'touchstart') e.preventDefault();
   };
 
   const stopDragging = () => {
@@ -1482,12 +1487,13 @@ document.querySelectorAll('[data-ba-slider]').forEach(slider => {
     if (!dragging) return;
     const x = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
     setPosition(x);
+    if (e.type === 'touchmove') e.preventDefault();
   };
 
   slider.addEventListener('mousedown', startDragging);
-  slider.addEventListener('touchstart', startDragging, { passive: true });
+  slider.addEventListener('touchstart', startDragging, { passive: false });
   window.addEventListener('mousemove', move);
-  window.addEventListener('touchmove', move, { passive: true });
+  window.addEventListener('touchmove', move, { passive: false });
   window.addEventListener('mouseup', stopDragging);
   window.addEventListener('touchend', stopDragging);
 });
