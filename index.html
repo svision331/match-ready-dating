@@ -1356,17 +1356,38 @@ function handleSubmit(e) {
   btn.style.pointerEvents = 'none';
 }
 
-// Floating CTA scroll logic
+// Floating CTA visibility logic
 const floatingCTA = document.getElementById('floatingCTA');
-const hero = document.querySelector('.hero');
+const footer = document.querySelector('footer');
+const bookingSection = document.getElementById('book');
 
-if (floatingCTA && hero) {
+if (floatingCTA) {
+  const ctaObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        floatingCTA.classList.remove('visible');
+        floatingCTA.style.pointerEvents = 'none';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  if (footer) ctaObserver.observe(footer);
+  if (bookingSection) ctaObserver.observe(bookingSection);
+
   window.addEventListener('scroll', () => {
     const triggerPoint = window.innerHeight * 0.8;
-    if (window.scrollY > triggerPoint) {
+    const isBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100;
+    
+    // Check if booking section is in view manually as well for redundancy
+    const bookingRect = bookingSection?.getBoundingClientRect();
+    const isBookingVisible = bookingRect && bookingRect.top < window.innerHeight && bookingRect.bottom > 0;
+
+    if (window.scrollY > triggerPoint && !isBookingVisible && !isBottom) {
       floatingCTA.classList.add('visible');
+      floatingCTA.style.pointerEvents = 'auto';
     } else {
       floatingCTA.classList.remove('visible');
+      floatingCTA.style.pointerEvents = 'none';
     }
   });
 }
@@ -1381,18 +1402,36 @@ document.querySelectorAll('[data-ba-slider]').forEach(slider => {
   function setPosition(x) {
     const rect = slider.getBoundingClientRect();
     let pct = ((x - rect.left) / rect.width) * 100;
-    pct = Math.max(2, Math.min(98, pct));
+    pct = Math.max(0, Math.min(100, pct));
     clip.style.width = pct + '%';
     divider.style.left = pct + '%';
     handle.style.left = pct + '%';
   }
 
-  slider.addEventListener('mousedown', e => { dragging = true; setPosition(e.clientX); e.preventDefault(); });
-  slider.addEventListener('touchstart', e => { dragging = true; setPosition(e.touches[0].clientX); }, { passive: true });
-  window.addEventListener('mousemove', e => { if (dragging) setPosition(e.clientX); });
-  window.addEventListener('touchmove', e => { if (dragging) setPosition(e.touches[0].clientX); }, { passive: true });
-  window.addEventListener('mouseup', () => { dragging = false; });
-  window.addEventListener('touchend', () => { dragging = false; });
+  const startDragging = (e) => {
+    dragging = true;
+    slider.style.cursor = 'grabbing';
+    const x = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    setPosition(x);
+  };
+
+  const stopDragging = () => {
+    dragging = false;
+    slider.style.cursor = 'ew-resize';
+  };
+
+  const move = (e) => {
+    if (!dragging) return;
+    const x = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    setPosition(x);
+  };
+
+  slider.addEventListener('mousedown', startDragging);
+  slider.addEventListener('touchstart', startDragging, { passive: true });
+  window.addEventListener('mousemove', move);
+  window.addEventListener('touchmove', move, { passive: true });
+  window.addEventListener('mouseup', stopDragging);
+  window.addEventListener('touchend', stopDragging);
 });
 
 // Testimonials infinite marquee — duplicate cards for seamless loop
