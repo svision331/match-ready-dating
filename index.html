@@ -634,24 +634,43 @@ footer { background: var(--surface-solid); border-top: 1px solid var(--border); 
       <div class="hero-search-bar reveal reveal-d2">
         <div class="search-field">
           <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <input type="text" placeholder="Your city">
+          <select id="hero-city">
+            <option value="" disabled selected>Your city</option>
+            <option value="New York">New York</option>
+            <option value="Los Angeles">Los Angeles</option>
+            <option value="Chicago">Chicago</option>
+            <option value="Atlanta">Atlanta</option>
+            <option value="Other">Other City</option>
+          </select>
         </div>
         <div class="search-field">
           <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          <input type="text" placeholder="Timeframe">
+          <select id="hero-timeframe">
+            <option value="" disabled selected>Timeframe</option>
+            <option value="ASAP">ASAP (Next 5 days)</option>
+            <option value="This Weekend">This Weekend</option>
+            <option value="Next Week">Next Week</option>
+            <option value="Next 2 Weeks">Next 2 weeks</option>
+            <option value="Flexible">Flexible / Next Month</option>
+          </select>
         </div>
         <div class="search-field" style="border-right:none;">
           <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
-          <select><option value="">Package</option><option>Starter — $149</option><option>Overhaul — $299</option><option>Full Treatment — $549</option></select>
+          <select id="hero-package">
+            <option value="" disabled selected>Package</option>
+            <option value="Starter — $149">Starter — $149</option>
+            <option value="Profile Overhaul — $299">Profile Overhaul — $299</option>
+            <option value="Full Treatment — $549">Full Treatment — $549</option>
+          </select>
         </div>
-        <button class="hero-search-btn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book Now</button>
+        <button class="hero-search-btn" onclick="transferHeroData()">Book Now</button>
       </div>
 
       <div class="hero-cities reveal reveal-d2">
-        <span class="city-tag">New York</span>
-        <span class="city-tag">Los Angeles</span>
-        <span class="city-tag">Chicago</span>
-        <span class="city-tag">Atlanta</span>
+        <span class="city-tag" style="cursor:pointer" onclick="setCity('New York')">New York</span>
+        <span class="city-tag" style="cursor:pointer" onclick="setCity('Los Angeles')">Los Angeles</span>
+        <span class="city-tag" style="cursor:pointer" onclick="setCity('Chicago')">Chicago</span>
+        <span class="city-tag" style="cursor:pointer" onclick="setCity('Atlanta')">Atlanta</span>
         <span class="city-tag">+ more cities</span>
       </div>
     </div>
@@ -1252,13 +1271,23 @@ footer { background: var(--surface-solid); border-top: 1px solid var(--border); 
                 <label for="package">Package</label>
                 <select id="package" required>
                   <option value="" disabled selected>Select a package</option>
-                  <option>Starter — $149</option>
-                  <option>Profile Overhaul — $299</option>
-                  <option>Full Treatment — $549</option>
-                  <option>Add-on only</option>
+                  <option value="Starter — $149">Starter — $149</option>
+                  <option value="Profile Overhaul — $299">Profile Overhaul — $299</option>
+                  <option value="Full Treatment — $549">Full Treatment — $549</option>
+                  <option value="Add-on only">Add-on only</option>
                 </select>
               </div>
-              <div class="form-field full"><label for="timeframe">Preferred timeframe</label><input type="text" id="timeframe" placeholder="e.g. any weekend in June, ASAP, flexible"></div>
+              <div class="form-field full">
+                <label for="timeframe">Preferred timeframe</label>
+                <select id="timeframe" required>
+                  <option value="" disabled selected>Select a timeframe</option>
+                  <option value="ASAP">ASAP (Next 5 days)</option>
+                  <option value="This Weekend">This Weekend</option>
+                  <option value="Next Week">Next Week</option>
+                  <option value="Next 2 Weeks">Next 2 weeks</option>
+                  <option value="Flexible">Flexible / Next Month</option>
+                </select>
+              </div>
               <div class="form-field full"><label for="referral">Referral code (optional)</label><input type="text" id="referral" placeholder="e.g. MARCUS25"></div>
               <div class="form-field full"><label for="notes">Anything I should know upfront?</label><textarea id="notes" placeholder="Goals, concerns, questions, current situation — whatever's on your mind."></textarea></div>
               <div class="form-field full"><button type="submit" class="form-submit-btn" id="submit-btn">Send booking request</button></div>
@@ -1439,6 +1468,30 @@ document.querySelectorAll('.testi-track').forEach(track => {
   const cards = track.innerHTML;
   track.innerHTML = cards + cards;
 });
+// Hero Data Transfer
+function transferHeroData() {
+  const heroCity = document.getElementById('hero-city').value;
+  const heroTime = document.getElementById('hero-timeframe').value;
+  const heroPkg = document.getElementById('hero-package').value;
+
+  if (heroCity) document.getElementById('city').value = heroCity;
+  if (heroTime) document.getElementById('timeframe').value = heroTime;
+  if (heroPkg) document.getElementById('package').value = heroPkg;
+
+  document.getElementById('book').scrollIntoView({ behavior: 'smooth' });
+  
+  // Flash the form to show data was transferred
+  const formCard = document.querySelector('.form-card');
+  formCard.style.transition = 'all 0.3s';
+  formCard.style.borderColor = 'var(--accent-base)';
+  setTimeout(() => {
+    formCard.style.borderColor = 'var(--border)';
+  }, 1000);
+}
+
+function setCity(city) {
+  document.getElementById('hero-city').value = city;
+}
 </script>
 </body>
 </html>
